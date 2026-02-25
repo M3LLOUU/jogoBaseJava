@@ -39,9 +39,10 @@ public class Batalha {
     // ----- Métodos Privados -----
 
     private void turnoHeroi(){
-        System.out.println("\n O que " + heroi.getNome() + "faz?");
+        System.out.println("\n O que " + heroi.getNome() + " faz?");
         System.out.println(" [1] Atacar");
-        System.out.println(" [2] Usar poção ( "+ heroi.getPocoes() + " restantes");
+        System.out.println(" [2] Usar poção ( "+ heroi.getPocoes() + " restantes )");
+        System.out.println(" [3] Usar Item do Inventário");
         System.out.println(" Escolha: ");
 
         int escolha = lerEscolha();
@@ -57,7 +58,14 @@ public class Batalha {
                     heroi.usarPocao();
                     break;
 
-                default:
+                case 3:
+                    heroi.listarItens();
+                    System.out.println(" Qual item (número)? ");
+                    int idx = lerEscolha() - 1;
+                    heroi.usarItem(idx);
+                    break;
+
+                    default:
                     System.out.println(" ❓ Opção inválida - turno perdido!");
             }
     }
@@ -65,7 +73,7 @@ public class Batalha {
     private void turnoMonstro(){
         int dano = monstro.atacar();
 
-        System.out.println("\n " + monstro.getNome() + " ataca por " + dano + "!");
+        System.out.println("\n " + monstro.getNome() + " atacado por " + dano + "!");
         heroi.receberDano(dano);
     }
 

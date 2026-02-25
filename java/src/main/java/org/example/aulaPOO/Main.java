@@ -14,6 +14,11 @@ public class Main {
 
        Heroi heroi = new Heroi(nomeHeroi, 100, 20, 5);
 
+        // Dando itens iniciais
+        heroi.adicionarItem(new Item("Poção Pequena",  "cura", 20));
+        heroi.adicionarItem(new Item("Poção Grande",   "cura", 50));
+        heroi.adicionarItem(new Item("Erva Medicinal", "cura", 15));
+
         System.out.println("\n✅ Herói criado com sucesso!");
         heroi.exibirStatus();
 
@@ -21,6 +26,9 @@ public class Main {
                 new Monstro("Goblin", "👹", 40, 12, 2, 20 ),
                 new Monstro("Orc Guerreiro", "👿", 70, 12, 2, 20 ),
                 new Monstro("Dragão", "👽", 40, 12, 2, 20 ),
+                // Novos monstros ⬇️
+                new Monstro("Vampira", "🧛🏻‍♂️", 40, 12, 2, 20 ),
+                new Monstro("Zumbi", "🧟", 60, 14, 2, 25)
         };
 
         int vitorias = 0;
@@ -43,6 +51,7 @@ public class Main {
 
             if (opcao == 2) {
                 System.out.println(" 🏃🏻 Você fugiu para o próximo corredor...");
+                continue;
             }
 
             Batalha batalha = new Batalha(heroi, monstro, scanner);

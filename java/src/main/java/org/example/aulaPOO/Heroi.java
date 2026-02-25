@@ -1,5 +1,5 @@
 package org.example.aulaPOO;
-
+import java.util.ArrayList;
 
 public class Heroi {
     private String nome;
@@ -8,11 +8,10 @@ public class Heroi {
     private int ataque;
     private int defesa;
     private int pocoes;
-    private int bussola;
-    private int traje;
     private int xp;
+    private int Item;
 
-    public Heroi(String nome, int vida, int ataque, int defesa int item){
+    public Heroi(String nome, int vida, int ataque, int defesa){
         this.nome = nome;
         this.vidaMax = vida;
         this.vidaAtual = vida;
@@ -20,7 +19,6 @@ public class Heroi {
         this.defesa = defesa;
         this.pocoes = 3;
         this.xp = 0;
-        this.item();
     }
 
     public String getNome() { return nome; }
@@ -28,9 +26,42 @@ public class Heroi {
     public int getAtaque()  { return ataque; }
     public int getDefesa()  { return defesa; }
     public int getPocoes()  { return pocoes; }
-    public int getBussola() { return bussola; }
-    public int getTraje() { return traje; }
     public int getXp()      { return xp; }
+
+
+    // Inventario
+    private ArrayList<Item> inventario = new ArrayList<Item>();
+
+    public void adicionarItem(Item item) {
+        inventario.add(item);
+        System.out.println("🎒 " + item.getNome() + " adicionado com sucesso!");
+    }
+
+    public void listarItens() {
+        if  (inventario.isEmpty()) {
+            System.out.println("🎒 Inventário vázio!");
+            return;
+        }
+
+        System.out.println("🎒 Inventário");
+        for (int i = 0; i<inventario.size(); i++) {
+            System.out.println((i+1) + ". " + inventario.get(i).getDescricao());
+        }
+    }
+
+    int indice;
+
+    public boolean usarItem(int idx){
+        if (this.indice < 0 || this.indice >= inventario.size()) {
+            System.out.println(" ❌ Item inválido");
+            return false;
+        }
+
+        Item item = inventario.get(this.indice);
+        item.usar(Heroi.this);
+        inventario.remove(this.indice);
+        return true;
+    }
 
     public int atacar(){
         int variacao = (int)(Math.random() * 10) - 5;
@@ -67,34 +98,6 @@ public class Heroi {
 
         System.out.println(nome + " usou poção! +30 " + "[" + vidaAtual + "/" + vidaMax + "] [Poções: " + pocoes + "]");
         return true;
-    }
-
-    public boolean usarBussola() {
-        if (bussola <= 0){
-            System.out.println("Sem bussola!");
-            return false;
-        }
-
-        if (bussola > 1){
-            System.out.println("Você tem uma bússola!");
-            return true;
-        }
-    }
-
-    public boolean usarTraje() {
-        if (traje <= 0){
-            System.out.println("Sem traje!");
-            return false;
-        }
-
-        if (traje > 1){
-            System.out.println("Você tem uma traje!");
-            return false;
-
-            traje -= 1;
-            System.out.println(nome + " Trocou de traje!");
-            return true;
-        }
     }
 
     public void ganharXp(int quantidade) {
