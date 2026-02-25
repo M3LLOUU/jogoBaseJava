@@ -1,5 +1,6 @@
 package org.example.aulaPOO;
 
+
 public class Heroi {
     private String nome;
     private int vidaMax;
@@ -7,9 +8,11 @@ public class Heroi {
     private int ataque;
     private int defesa;
     private int pocoes;
+    private int bussola;
+    private int traje;
     private int xp;
 
-    public Heroi(String nome, int vida, int ataque, int defesa){
+    public Heroi(String nome, int vida, int ataque, int defesa int item){
         this.nome = nome;
         this.vidaMax = vida;
         this.vidaAtual = vida;
@@ -17,6 +20,7 @@ public class Heroi {
         this.defesa = defesa;
         this.pocoes = 3;
         this.xp = 0;
+        this.item();
     }
 
     public String getNome() { return nome; }
@@ -24,6 +28,8 @@ public class Heroi {
     public int getAtaque()  { return ataque; }
     public int getDefesa()  { return defesa; }
     public int getPocoes()  { return pocoes; }
+    public int getBussola() { return bussola; }
+    public int getTraje() { return traje; }
     public int getXp()      { return xp; }
 
     public int atacar(){
@@ -61,6 +67,34 @@ public class Heroi {
 
         System.out.println(nome + " usou poção! +30 " + "[" + vidaAtual + "/" + vidaMax + "] [Poções: " + pocoes + "]");
         return true;
+    }
+
+    public boolean usarBussola() {
+        if (bussola <= 0){
+            System.out.println("Sem bussola!");
+            return false;
+        }
+
+        if (bussola > 1){
+            System.out.println("Você tem uma bússola!");
+            return true;
+        }
+    }
+
+    public boolean usarTraje() {
+        if (traje <= 0){
+            System.out.println("Sem traje!");
+            return false;
+        }
+
+        if (traje > 1){
+            System.out.println("Você tem uma traje!");
+            return false;
+
+            traje -= 1;
+            System.out.println(nome + " Trocou de traje!");
+            return true;
+        }
     }
 
     public void ganharXp(int quantidade) {
